@@ -1,0 +1,26 @@
+<div class="header-wrapper" fxLayout="row" fxLayoutAlign="space-between center"  fxFlexAlign="center">
+  <div class="left-header" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+     <div class="logo" fxLayout="row" fxLayoutAlign="center center"  fxFlexAlign="center"  style="background: blue;width: 150px;height: 30px;text-align: center;border-radius: 5px;">Logo</div> 
+      <div class="header-menu">
+          <nav class="navbar">
+            <ul class="navigation-list" fxLayout="row" fxLayoutGap="15px" >
+               <li><a [routerLink]="['/dashboard']" routerLinkActive="active"  *ngIf="isLoggedIn">Dashboard</a></li>
+               <li><a [routerLink]="['/home']" routerLinkActive="active"  *ngIf="isLoggedIn">Home</a></li>
+               <li><a [routerLink]="['/product']" routerLinkActive="active"  *ngIf="isLoggedIn">Product</a></li> 
+            </ul>
+          </nav>
+      </div>
+  </div>
+  <div class="right-header">
+    <div class="right-navigation">
+      <nav class="right-navigation-list">
+        <ul class="right-nav-listing" fxLayout="row" fxLayoutGap="10px">
+           <li><a [routerLink]="['/login']" routerLinkActive="active"  *ngIf="!isLoggedIn">Login</a></li>
+           <li><a [routerLink]="['/login']" routerLinkActive="active" (click)="onSignOut()"  *ngIf="isLoggedIn">Logout</a></li>
+           <!-- <li><a href="javascript:void(0)">Sign Up</a></li> -->
+        </ul>
+      </nav>
+
+    </div>  
+  </div>
+</div>

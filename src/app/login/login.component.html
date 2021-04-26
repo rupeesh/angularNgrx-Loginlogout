@@ -1,0 +1,46 @@
+             <!--Start of the error --> 
+             <mat-card *ngIf="error" class="alert alert-danger mt-3" >
+                <b>An Error Occur:-</b> {{error}}
+             </mat-card>
+             <!--End of the error alert -->
+
+<div class="flex-container login-box" fxLayout="row" fxFlexFill="full" fxLayoutAlign="center center" fxFlexAlign="center">
+    <div class="login-wrapper-box">
+        <h2 >{{LoginMode ? 'Login In' : 'Sign Up'}} Form</h2>
+
+
+
+       <form fxLayout="column" fxLayoutAlign="center center" fxFlexAlign="center" [formGroup]="signUpForm" 
+        (ngSubmit)="onSubmit()">
+           
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput name="email" formControlName="email"  placeholder="Email Id">
+            <mat-error class="error-msg" *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched">
+              Please enter a valid email address
+            </mat-error>
+          </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input type="text" matInput name="password"  formControlName="password"  placeholder="Password">
+            <mat-error class="error-msg" *ngIf="!signUpForm.get('password').valid && signUpForm.get('password').touched">
+              Please enter a valid password address
+            </mat-error>
+          </mat-form-field>
+          
+          <p> {{LoginMode ? 'Don`t have account' : 'Already have account'}}
+            <a href="javascript:void(0)" (click)="onModeSwitch()">
+           {{LoginMode ? 'Create One' : 'Sign In'}}
+
+       </a></p>
+       <!-- <div class="forget-journery pb-3">
+           <a href="javascript:void(0)" (click)="forgetPassword()">Forget Password</a>
+       </div>
+        -->
+          <button mat-raised-button class="loginbtn" color="primary" fxFlexAlign="start" [disabled]="!signUpForm.valid">
+            {{LoginMode ? 'Login' : 'Create Account'}}
+          </button>
+       </form> 
+    </div>
+</div>
