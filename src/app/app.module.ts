@@ -14,6 +14,16 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.inteceptor';
+import { StoreModule } from '@ngrx/store';
+import { AUTH_STATE_NAME } from './state/auth.selector';
+import { AuthReducer } from './state/auth.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './state/auth.effects';
+import { appReducer } from './store/app.state';
+import { LoadspinnerComponent } from './loadspinner/loadspinner.component';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -23,7 +33,8 @@ import { AuthInterceptor } from './auth/auth.inteceptor';
     DashboardComponent,
     HomeComponent,
     ProductComponent,
-    
+    LoadspinnerComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -33,7 +44,15 @@ import { AuthInterceptor } from './auth/auth.inteceptor';
     FlexLayoutModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(appReducer),
+    StoreDevtoolsModule.instrument({
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
+    StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),
+    EffectsModule.forRoot([AuthEffects]),
+    StoreRouterConnectingModule.forRoot(),
+    
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true }

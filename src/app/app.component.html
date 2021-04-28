@@ -1,2 +1,9 @@
 <app-header></app-header>
+<app-loadspinner *ngIf="showLoading | async"></app-loadspinner>
+             <!--Start of the error --> 
+             <mat-card *ngIf="errorMessage | async as error" class="alert alert-danger mt-3" >
+                <b>An Error Occur:-</b> {{error}}
+             </mat-card>
+             <!--End of the error alert -->
+
 <router-outlet></router-outlet>
